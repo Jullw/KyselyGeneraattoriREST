@@ -1,2 +1,2 @@
-KyselyGeneraattoriREST
-KyselyGeneraattoriREST
+API endpoints for quizzes
+
