@@ -19,24 +19,36 @@ class QuizController {
         this.repository = repository;
     }
 
-
     @GetMapping("/quizzes")
     List<Quiz> all() {
         return repository.findAll();
     }
-
 
     @PostMapping("/quizzes")
     Quiz newQuiz(@RequestBody Quiz newQuiz) {
         return repository.save(newQuiz);
     }
 
-
     @GetMapping("/quizzes/{id}")
     Quiz one(@PathVariable Long id) {
 
         return repository.findById(id)
                 .orElseThrow(() -> new QuizNotFoundException(id));
+    }
+
+    @PutMapping("/quizzes/{id}")
+    Quiz replaceQuiz(@RequestBody Quiz newQuiz, @PathVariable Long id) {
+
+        return repository.findById(id)
+                .map(quiz -> {
+                    quiz.setQuestion(newQuiz.getQuestion());
+                    quiz.setAnswer(newQuiz.getAnswer());
+                    return repository.save(quiz);
+                })
+                .orElseGet(() -> {
+                    newQuiz.setId(id);
+                    return repository.save(newQuiz);
+                });
     }
 
     @PutMapping("/quizzes/{id}")

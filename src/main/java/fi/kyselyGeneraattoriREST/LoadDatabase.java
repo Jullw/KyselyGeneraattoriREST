@@ -15,8 +15,8 @@ class LoadDatabase {
     CommandLineRunner initDatabase(QuizRepository repository) {
 
         return args -> {
-            log.info("Preloading " + repository.save(new Quiz("Bilbo Baggins", "burglar")));
-            log.info("Preloading " + repository.save(new Quiz("Frodo Baggins", "thief")));
+            log.info("Preloading " + repository.save(new Quiz("Mikä on suomen pääkaupunki?", "")));
+            log.info("Preloading " + repository.save(new Quiz("Miten menee?", "")));
         };
     }
 }
