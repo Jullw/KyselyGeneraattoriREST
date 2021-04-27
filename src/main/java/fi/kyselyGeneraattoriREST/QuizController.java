@@ -51,21 +51,6 @@ class QuizController {
                 });
     }
 
-    @PutMapping("/quizzes/{id}")
-    Quiz replaceQuiz(@RequestBody Quiz newQuiz, @PathVariable Long id) {
-
-        return repository.findById(id)
-                .map(quiz -> {
-                    quiz.setQuestion(newQuiz.getQuestion());
-                    quiz.setAnswer(newQuiz.getAnswer());
-                    return repository.save(quiz);
-                })
-                .orElseGet(() -> {
-                    newQuiz.setId(id);
-                    return repository.save(newQuiz);
-                });
-    }
-
     @DeleteMapping("/quizzes/{id}")
     void deleteQuiz(@PathVariable Long id) {
         repository.deleteById(id);
