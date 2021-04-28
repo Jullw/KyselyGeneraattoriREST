@@ -15,6 +15,7 @@ class Quiz {
     Long id;
     private String question;
     private String answer;
+    private String href;
 
     public Quiz() {
     }
@@ -23,8 +24,17 @@ class Quiz {
 
         this.question = question;
         this.answer = answer;
+        this.href = "https://kyselygeneraattori00.herokuapp.com/quizzes/"+id;
     }
 
+    public String getHref() {
+        return href;
+    }
+
+    public void setHref(String href) {
+        this.href = href;
+    }
+   
     public Long getId() {
         return this.id;
     }
