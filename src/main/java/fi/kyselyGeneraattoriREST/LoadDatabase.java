@@ -17,6 +17,7 @@ class LoadDatabase {
         return args -> {
             log.info("Preloading " + repository.save(new Quiz("Mikä on suomen pääkaupunki?", "")));
             log.info("Preloading " + repository.save(new Quiz("Miten menee?", "")));
+           
         };
     }
 }
