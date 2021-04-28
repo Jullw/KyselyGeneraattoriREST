@@ -18,14 +18,14 @@ class Quiz {
     private String href;
 
     public Quiz() {
-        this.href = "https://kyselygeneraattori00.herokuapp.com/quizzes/"+id;
+        this.href = "https://kyselygeneraattori00.herokuapp.com/quizzes/"+getId();
     }
 
     public Quiz(String question, String answer) {
 
         this.question = question;
         this.answer = answer;
-        this.href = "https://kyselygeneraattori00.herokuapp.com/quizzes/"+id;
+        this.href = "https://kyselygeneraattori00.herokuapp.com/quizzes/"+getId();
     }
 
     public String getHref() {
