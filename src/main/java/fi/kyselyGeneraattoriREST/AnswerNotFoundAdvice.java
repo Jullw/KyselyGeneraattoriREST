@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
-public class QuizNotFoundAdvice {
-
+public class AnswerNotFoundAdvice {
     @ResponseBody
-    @ExceptionHandler(QuizNotFoundException.class)
+    @ExceptionHandler(AnswerNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String quizNotFoundHandler(QuizNotFoundException ex) {
+    String answerNotFoundHandler(AnswerNotFoundException ex) {
         return ex.getMessage();
     }
 }
+
