@@ -20,7 +20,7 @@ class Quiz {
     private long id;
 
     private String title;
-    private String href = "https://kyselygeneraattori00.herokuapp.com/quizzes";
+    private String href = "localhost:8080/quizzes/";
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "quiz")

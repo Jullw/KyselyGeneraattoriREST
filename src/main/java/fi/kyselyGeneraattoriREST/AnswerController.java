@@ -10,59 +10,51 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
 public class AnswerController {
-
+   
     @Autowired
-    private AnswerRepository answerRepository;
-
-    @Autowired
-    private QuestionsRepository questionRepository;
-
-    @Autowired
-    private QuizRepository quizRepository;
-
+    private AnswerRepository repository;
+    
     @GetMapping("/answers")
     List<Answer> all() {
-        return answerRepository.findAll();
+        return repository.findAll();
     }
 
     @PostMapping("/answer")
     Answer newAnswer(@RequestBody Answer newAnswer) {
-        return answerRepository.save(newAnswer);
+        return repository.save(newAnswer);
     }
 
     @GetMapping("/answer/{id}")
     Answer one(@PathVariable Long id) {
-        return answerRepository.findById(id)
+        return repository.findById(id)
                 .orElseThrow(() -> new AnswerNotFoundException(id));
     }
 
     @PutMapping("/answer/{id}")
     Answer replaceAnswer(@RequestBody Answer newAnswer, @PathVariable Long id) {
 
-        return answerRepository.findById(id)
+        return repository.findById(id)
                 .map(answer -> {
                     answer.setAnswer(answer.getAnswer());
-                    return answerRepository.save(answer);
+                    return repository.save(answer);
                 })
                 .orElseGet(() -> {
                     newAnswer.setId(id);
-                    return answerRepository.save(newAnswer);
+                    return repository.save(newAnswer);
                 });
     }
-
-    @GetMapping("/answer_question/{id}")
-    Question findQuestionWhereAnswerBelongs(@PathVariable Long id) {
-        Answer a = answerRepository.findById(id)
-                .orElseThrow(() -> new AnswerNotFoundException(id));
-        return a.getQuestion();
-
-    }
-
+    
+    
     //quiz.setAnswer(newQuiz.getAnswer());
+    
     @DeleteMapping("/answers/{id}")
     void deleteQuiz(@PathVariable Long id) {
-        answerRepository.deleteById(id);
+        repository.deleteById(id);
     }
 }
+
+    
+

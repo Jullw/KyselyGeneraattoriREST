@@ -58,7 +58,9 @@ public class QuestionController {
         
         return q.getQuiz();
                
-
+        
+       /* return quizRepository.findById(id)
+                .orElseThrow(() -> new QuizNotFoundException(id)); */
     }
 
     //quiz.setAnswer(newQuiz.getAnswer());
