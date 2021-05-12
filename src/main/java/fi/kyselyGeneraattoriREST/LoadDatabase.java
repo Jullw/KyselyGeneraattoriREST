@@ -34,7 +34,7 @@ class LoadDatabase {
             log.info("Preloading " + quizrepository.save(q));
             log.info("Preloading " + quizrepository.save(a));
             
-            log.info("Preloading " + quizrepository.findByTitle("Hei maailma?dd").get(0).getHref());
+
             
             questionrepository.save(new Question("Hei lllkjlk",
                     quizrepository.findByTitle("Hei maailma?").get(0)));

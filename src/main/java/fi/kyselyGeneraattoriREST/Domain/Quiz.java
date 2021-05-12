@@ -20,7 +20,6 @@ public class Quiz {
     private long id;
 
     private String title;
-    private String href = "localhost:8080/quizzes/";
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "quiz")
@@ -28,12 +27,11 @@ public class Quiz {
 
     public Quiz() {
         super();
-        this.href = this.href + String.valueOf(getId());
+
     }
 
     public Quiz(String title) {
         super();
-        this.href = this.href + String.valueOf(getId());
         this.title = title;
 
     }
@@ -41,15 +39,7 @@ public class Quiz {
     public Quiz(String title, List<Question> questions) {
         this.title = title;
         this.questions = questions;
-        this.href = this.href + String.valueOf(getId());
-    }
 
-    public String getHref() {
-        return href;
-    }
-
-    public void setHref(String href) {
-        this.href = href;
     }
 
     public List<Question> getQuestions() {
