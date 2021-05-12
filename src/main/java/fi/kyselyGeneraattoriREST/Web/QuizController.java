@@ -1,5 +1,7 @@
-package fi.kyselyGeneraattoriREST;
+package fi.kyselyGeneraattoriREST.Web;
 
+import fi.kyselyGeneraattoriREST.Domain.QuizRepository;
+import fi.kyselyGeneraattoriREST.Domain.Quiz;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 

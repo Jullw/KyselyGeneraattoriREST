@@ -1,4 +1,4 @@
-package fi.kyselyGeneraattoriREST;
+package fi.kyselyGeneraattoriREST.Web;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;

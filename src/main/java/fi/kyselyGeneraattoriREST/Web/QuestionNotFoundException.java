@@ -1,4 +1,4 @@
-package fi.kyselyGeneraattoriREST;
+package fi.kyselyGeneraattoriREST.Web;
 
 public class QuestionNotFoundException extends RuntimeException {
 

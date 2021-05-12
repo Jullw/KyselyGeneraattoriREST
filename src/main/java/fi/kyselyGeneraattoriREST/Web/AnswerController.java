@@ -1,5 +1,7 @@
-package fi.kyselyGeneraattoriREST;
+package fi.kyselyGeneraattoriREST.Web;
 
+import fi.kyselyGeneraattoriREST.Domain.Answer;
+import fi.kyselyGeneraattoriREST.Domain.AnswerRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;

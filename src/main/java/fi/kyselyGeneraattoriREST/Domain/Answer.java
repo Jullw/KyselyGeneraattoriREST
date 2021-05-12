@@ -1,4 +1,4 @@
-package fi.kyselyGeneraattoriREST;
+package fi.kyselyGeneraattoriREST.Domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Objects;

@@ -1,4 +1,4 @@
-package fi.kyselyGeneraattoriREST;
+package fi.kyselyGeneraattoriREST.Domain;
 
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;

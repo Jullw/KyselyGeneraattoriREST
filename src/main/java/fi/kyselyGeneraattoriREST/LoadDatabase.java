@@ -1,5 +1,11 @@
 package fi.kyselyGeneraattoriREST;
 
+import fi.kyselyGeneraattoriREST.Domain.QuestionsRepository;
+import fi.kyselyGeneraattoriREST.Domain.Question;
+import fi.kyselyGeneraattoriREST.Domain.QuizRepository;
+import fi.kyselyGeneraattoriREST.Domain.Answer;
+import fi.kyselyGeneraattoriREST.Domain.Quiz;
+import fi.kyselyGeneraattoriREST.Domain.AnswerRepository;
 import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

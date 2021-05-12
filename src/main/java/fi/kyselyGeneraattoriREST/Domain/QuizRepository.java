@@ -1,5 +1,5 @@
 
-package fi.kyselyGeneraattoriREST;
+package fi.kyselyGeneraattoriREST.Domain;
 
 
 
