@@ -23,6 +23,8 @@ public class Question {
     Long id;
     private String question;
     
+    private String kysymyksentyyppi;  // yksivalintainen radio, monivalintainen checkbox, skaala 1-5, ja avoin teksti. 
+    
     
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
@@ -48,12 +50,28 @@ public class Question {
     }
 
     public Question(String question, List<Answer> answers, Quiz quiz) {
+        super();
         this.question = question;
         this.answers = answers;
         this.quiz = quiz;
     }
     
-    
+    public Question(String question, String kysymyksentyyppi, List<Answer> answers, Quiz quiz) {
+        super();
+        this.question = question;
+        this.kysymyksentyyppi = kysymyksentyyppi;
+        this.answers = answers;
+        this.quiz = quiz;
+    }
+
+    public String getKysymyksentyyppi() {
+        return kysymyksentyyppi;
+    }
+
+    public void setKysymyksentyyppi(String kysymyksentyyppi) {
+        this.kysymyksentyyppi = kysymyksentyyppi;
+    }
+
     public Quiz getQuiz() {
         return quiz;
     }
