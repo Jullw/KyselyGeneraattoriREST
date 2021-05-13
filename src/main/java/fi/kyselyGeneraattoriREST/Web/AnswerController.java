@@ -2,6 +2,9 @@ package fi.kyselyGeneraattoriREST.Web;
 
 import fi.kyselyGeneraattoriREST.Domain.Answer;
 import fi.kyselyGeneraattoriREST.Domain.AnswerRepository;
+import fi.kyselyGeneraattoriREST.Domain.Question;
+import fi.kyselyGeneraattoriREST.Domain.QuestionsRepository;
+import fi.kyselyGeneraattoriREST.Domain.Quiz;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,55 +16,60 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 public class AnswerController {
-   
+
     @Autowired
-    private AnswerRepository repository;
+    private AnswerRepository answerRepository;
     
+    @Autowired
+    private QuestionsRepository questionrepository;
+
     @CrossOrigin
     @GetMapping("/answers")
     List<Answer> all() {
-        return repository.findAll();
+        return answerRepository.findAll();
     }
-    
+
     @CrossOrigin
     @PostMapping("/answer")
     Answer newAnswer(@RequestBody Answer newAnswer) {
-        return repository.save(newAnswer);
+        return answerRepository.save(newAnswer);
     }
-    
+
     @CrossOrigin
     @GetMapping("/answer/{id}")
     Answer one(@PathVariable Long id) {
-        return repository.findById(id)
+        return answerRepository.findById(id)
                 .orElseThrow(() -> new AnswerNotFoundException(id));
     }
-    
+
+    @CrossOrigin
+    @GetMapping("/getAnswerFromQuestion/{id}")
+    List<Answer> getAnswerFromQuestion(@PathVariable Long id) {
+        Question q = questionrepository.findById(id)
+                .orElseThrow(() -> new QuizNotFoundException(id));
+        return answerRepository.findByQuestion(q);
+    }
+
     @CrossOrigin
     @PutMapping("/answer/{id}")
     Answer replaceAnswer(@RequestBody Answer newAnswer, @PathVariable Long id) {
-
-        return repository.findById(id)
+        return answerRepository.findById(id)
                 .map(answer -> {
                     answer.setAnswer(answer.getAnswer());
-                    return repository.save(answer);
+                    return answerRepository.save(answer);
                 })
                 .orElseGet(() -> {
                     newAnswer.setId(id);
-                    return repository.save(newAnswer);
+                    return answerRepository.save(newAnswer);
                 });
     }
-    
-    
+
     //quiz.setAnswer(newQuiz.getAnswer());
     @CrossOrigin
     @DeleteMapping("/answers/{id}")
     void deleteQuiz(@PathVariable Long id) {
-        repository.deleteById(id);
+        answerRepository.deleteById(id);
     }
 }
-
-    
-
