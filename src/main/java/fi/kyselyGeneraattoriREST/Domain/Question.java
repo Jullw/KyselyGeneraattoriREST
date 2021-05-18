@@ -1,13 +1,11 @@
 package fi.kyselyGeneraattoriREST.Domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -23,7 +21,7 @@ public class Question {
     Long id;
     private String question;
     
-    private String kysymyksentyyppi;  // yksivalintainen radio, monivalintainen checkbox, skaala 1-5, ja avoin teksti. 
+   // private String kysymyksentyyppi;  // yksivalintainen radio, monivalintainen checkbox, skaala 1-5, ja avoin teksti. 
     
     
     @JsonIgnore
@@ -56,22 +54,22 @@ public class Question {
         this.quiz = quiz;
     }
     
-    public Question(String question, String kysymyksentyyppi, List<Answer> answers, Quiz quiz) {
+   /* public Question(String question, String kysymyksentyyppi, List<Answer> answers, Quiz quiz) {
         super();
         this.question = question;
-        this.kysymyksentyyppi = kysymyksentyyppi;
+        //this.kysymyksentyyppi = kysymyksentyyppi;
         this.answers = answers;
         this.quiz = quiz;
-    }
+    } */
 
-    public String getKysymyksentyyppi() {
+ /*   public String getKysymyksentyyppi() {
         return kysymyksentyyppi;
     }
 
     public void setKysymyksentyyppi(String kysymyksentyyppi) {
         this.kysymyksentyyppi = kysymyksentyyppi;
     }
-
+*/
     public Quiz getQuiz() {
         return quiz;
     }
