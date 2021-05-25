@@ -23,11 +23,14 @@ public class Question {
     
    // private String kysymyksentyyppi;  // yksivalintainen radio, monivalintainen checkbox, skaala 1-5, ja avoin teksti. 
     
-    
-    @JsonIgnore
+   
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
     private List<Answer> answers;
     
+  //  private String rightAnswer;
+    
+    
+    @JsonIgnore
     @ManyToOne()
     @JoinColumn(name="quiz_id")
     Quiz quiz;

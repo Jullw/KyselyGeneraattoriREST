@@ -18,10 +18,9 @@ public class Quiz {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     private String title;
 
-    @JsonIgnore
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "quiz")
     private List<Question> questions;
 

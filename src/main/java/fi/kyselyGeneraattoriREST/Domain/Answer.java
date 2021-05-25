@@ -1,6 +1,7 @@
 package fi.kyselyGeneraattoriREST.Domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +18,9 @@ public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-        
+    
+    
+    @JsonIgnore
     @ManyToOne()
     @JoinColumn(name ="question_id")
     private Question question;
@@ -28,7 +31,7 @@ public class Answer {
         super();
         
     }
-
+    
     public Answer(String answer) {
         super();
         this.answer = answer;
