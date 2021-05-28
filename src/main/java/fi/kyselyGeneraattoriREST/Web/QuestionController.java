@@ -6,7 +6,6 @@ import fi.kyselyGeneraattoriREST.Domain.Quiz;
 import fi.kyselyGeneraattoriREST.Domain.QuizRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,23 +25,28 @@ public class QuestionController {
     @Autowired
     private QuizRepository quizRepository;
 
- /*   @CrossOrigin
-    @GetMapping("/questions")
-    List<Question> all() {
-        return questionRepository.findAll();
-    } */
-
-    @GetMapping(value = "/questions")
-    List<Question> all() {
+    @CrossOrigin
+    @GetMapping("/allQuestions")
+    List<Question> getAllQuestions() {
         return questionRepository.findAll();
     }
 
     @CrossOrigin
-    @PostMapping("/questions")
-    Question newQuestion(@RequestBody Question newQuestion) {
+    @PostMapping("/addQuestion")
+    Question addQuestion(@RequestBody Question newQuestion) {
         return questionRepository.save(newQuestion);
     }
-/*
+
+    @CrossOrigin
+    @PostMapping("addQuestionToQuiz/{id}")
+    Question addNewQuestionToQuiz(@RequestBody Question newQuestion, @PathVariable Long id) {
+
+        Quiz q = quizRepository.findById(id)
+                .orElseThrow(() -> new QuizNotFoundException(id));
+        newQuestion.setQuiz(q);
+        return questionRepository.save(newQuestion);
+    }
+
     @CrossOrigin
     @GetMapping("/getQuestionsFromQuiz/{id}")
     List<Question> getQuestionsFromQuiz(@PathVariable Long id) {
@@ -50,25 +54,16 @@ public class QuestionController {
                 .orElseThrow(() -> new QuizNotFoundException(id));
         return questionRepository.findByQuiz(q);
     }
-*/
-    
+
     @CrossOrigin
-    @GetMapping("/getQuestionsFromQuiz/{id}")
-    public @ResponseBody List<Question> getQuestionsFromQuiz(@PathVariable Long id) {
-        Quiz q = quizRepository.findById(id)
-                .orElseThrow(() -> new QuizNotFoundException(id));
-        return (List<Question>) questionRepository.findByQuiz(q);
-    }
-    
-    @CrossOrigin
-    @GetMapping("/questions/{id}")
-    Question one(@PathVariable Long id) {
+    @GetMapping("/getOneQuestion/{id}")
+    Question getOneQuestion(@PathVariable Long id) {
         return questionRepository.findById(id)
                 .orElseThrow(() -> new QuestionNotFoundException(id));
     }
 
     @CrossOrigin
-    @PutMapping("/questions/{id}")
+    @PutMapping("/replaceQuestions/{id}")
     Question replaceQuestion(@RequestBody Question newQuestion, @PathVariable Long id) {
 
         return questionRepository.findById(id)
@@ -83,7 +78,7 @@ public class QuestionController {
     }
 
     @CrossOrigin
-    @GetMapping("/question_quiz/{id}")
+    @GetMapping("/getQuizWhereQuestionBelongs/{id}")
     Quiz findQuizWhereQuestionBelongs(@PathVariable Long id) {
         Question q = questionRepository.findById(id)
                 .orElseThrow(() -> new QuestionNotFoundException(id));
@@ -94,10 +89,9 @@ public class QuestionController {
                 .orElseThrow(() -> new QuizNotFoundException(id)); */
     }
 
-    //quiz.setAnswer(newQuiz.getAnswer());
     @CrossOrigin
-    @DeleteMapping("/questions/{id}")
-    void deletenewQuestion(@PathVariable Long id) {
+    @GetMapping("/deleteQuestion/{id}")
+    void deleteQuestion(@PathVariable Long id) {
         questionRepository.deleteById(id);
     }
 

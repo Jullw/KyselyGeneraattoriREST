@@ -21,39 +21,50 @@ public class AnswerController {
 
     @Autowired
     private AnswerRepository answerRepository;
-    
+
     @Autowired
     private QuestionsRepository questionrepository;
 
     @CrossOrigin
-    @GetMapping("/answers")
-    List<Answer> all() {
+    @GetMapping("/allAnswers")
+    List<Answer> allAnswers() {
         return answerRepository.findAll();
     }
 
     @CrossOrigin
-    @PostMapping("/answer")
-    Answer newAnswer(@RequestBody Answer newAnswer) {
-        return answerRepository.save(newAnswer);
-    }
-
-    @CrossOrigin
-    @GetMapping("/answer/{id}")
-    Answer one(@PathVariable Long id) {
+    @GetMapping("/getOneAnswer/{id}")
+    Answer getOneAnswer(@PathVariable Long id) {
         return answerRepository.findById(id)
                 .orElseThrow(() -> new AnswerNotFoundException(id));
     }
 
     @CrossOrigin
-    @GetMapping("/getAnswerFromQuestion/{id}")
-    List<Answer> getAnswerFromQuestion(@PathVariable Long id) {
+    @GetMapping("/getAnswersFromQuestion/{id}")
+    List<Answer> getAnswersFromQuestion(@PathVariable Long id) {
         Question q = questionrepository.findById(id)
-                .orElseThrow(() -> new QuizNotFoundException(id));
+                .orElseThrow(() -> new QuestionNotFoundException(id));
         return answerRepository.findByQuestion(q);
     }
 
     @CrossOrigin
-    @PutMapping("/answer/{id}")
+    @PostMapping("/addAnswer")
+    Answer addAnswer(@RequestBody Answer newAnswer) {
+        return answerRepository.save(newAnswer);
+    }
+
+    @CrossOrigin
+    @PostMapping("/addAnswerToQuestion/{id}")
+    Answer addNewQuestionToQuiz(@RequestBody Answer newAnswer, @PathVariable Long id) {
+
+        Question q = questionrepository.findById(id)
+                .orElseThrow(() -> new QuestionNotFoundException(id));
+
+        newAnswer.setQuestion(q);
+        return answerRepository.save(newAnswer);
+    }
+
+    @CrossOrigin
+    @PutMapping("/replaceAnswer/{id}")
     Answer replaceAnswer(@RequestBody Answer newAnswer, @PathVariable Long id) {
         return answerRepository.findById(id)
                 .map(answer -> {
@@ -66,10 +77,9 @@ public class AnswerController {
                 });
     }
 
-    //quiz.setAnswer(newQuiz.getAnswer());
     @CrossOrigin
-    @DeleteMapping("/answers/{id}")
-    void deleteQuiz(@PathVariable Long id) {
+    @GetMapping("/deleteAnswer/{id}")
+    void deleteAnswer(@PathVariable Long id) {
         answerRepository.deleteById(id);
     }
 }

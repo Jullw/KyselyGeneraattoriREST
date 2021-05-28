@@ -26,40 +26,26 @@ class QuizController {
     private QuestionsRepository questionRepository;
     
     @CrossOrigin
-    @GetMapping("/quizzes")
-    List<Quiz> all() {
+    @GetMapping("/allQuizzes")
+    List<Quiz> getAllQuizzes() {
         return repository.findAll();
     }
     
     @CrossOrigin
-    @PostMapping("/quizzes")
-    Quiz newQuiz(@RequestBody Quiz newQuiz) {
+    @PostMapping("/addQuiz")
+    Quiz addQuiz(@RequestBody Quiz newQuiz) {
         return repository.save(newQuiz);
     }
     
     @CrossOrigin
-    @GetMapping("/quizzes/{id}")
-    Quiz one(@PathVariable Long id) {
+    @GetMapping("/getOneQuiz/{id}")
+    Quiz getOneQuiz(@PathVariable Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new QuizNotFoundException(id));
     }
-
-    /*  @GetMapping("/sss/{id}")
-    List<Question> returnQuestions(@PathVariable Long id){
-        
-        return repository.findById();
-                
-
-} */
-
-    @CrossOrigin
-    @GetMapping("/questionFrom")
-    List<Question> questionsFromQuiz() {
-        return questionRepository.findAll();
-    }
     
     @CrossOrigin
-    @PutMapping("/quizzes/{id}")
+    @PutMapping("/replaceQuiz/{id}")
     Quiz replaceQuiz(@RequestBody Quiz newQuiz, @PathVariable Long id) {
 
         return repository.findById(id)
@@ -73,9 +59,8 @@ class QuizController {
                 });
     }
 
-    //quiz.setAnswer(newQuiz.getAnswer());
     @CrossOrigin
-    @DeleteMapping("/quizzes/{id}")
+    @GetMapping("/deleteQuiz/{id}")
     void deleteQuiz(@PathVariable Long id) {
         repository.deleteById(id);
     }

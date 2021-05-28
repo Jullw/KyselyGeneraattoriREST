@@ -1,5 +1,5 @@
 package fi.kyselyGeneraattoriREST;
-
+/*
 import fi.kyselyGeneraattoriREST.Domain.QuestionsRepository;
 import fi.kyselyGeneraattoriREST.Domain.Question;
 import fi.kyselyGeneraattoriREST.Domain.QuizRepository;
@@ -22,7 +22,7 @@ class LoadDatabase {
     CommandLineRunner initDatabase(QuizRepository quizrepository, QuestionsRepository questionrepository, AnswerRepository answerRepository) {
 
         return args -> {
-
+            
             long i = 1L;
 
             Quiz k1 = new Quiz("Mikä Eläin kyseessä kysely", new ArrayList<>());
@@ -80,8 +80,9 @@ class LoadDatabase {
             answerRepository.save(a6);
             answerRepository.save(a7);
             answerRepository.save(a8);
-            answerRepository.save(a9);
+            answerRepository.save(a9); 
 
         };
     }
 }
+*/
