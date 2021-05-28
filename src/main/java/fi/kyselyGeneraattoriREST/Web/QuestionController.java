@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class QuestionController {
 
     @Autowired
@@ -32,9 +32,9 @@ public class QuestionController {
         return questionRepository.findAll();
     } */
 
-    @GetMapping(value = "/api/questions")
-    public @ResponseBody List<Question> all() {
-        return (List<Question>) questionRepository.findAll();
+    @GetMapping(value = "/questions")
+    List<Question> all() {
+        return questionRepository.findAll();
     }
 
     @CrossOrigin
