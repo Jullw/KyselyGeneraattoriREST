@@ -42,7 +42,7 @@ public class QuestionController {
     Question newQuestion(@RequestBody Question newQuestion) {
         return questionRepository.save(newQuestion);
     }
-
+/*
     @CrossOrigin
     @GetMapping("/getQuestionsFromQuiz/{id}")
     List<Question> getQuestionsFromQuiz(@PathVariable Long id) {
@@ -50,7 +50,16 @@ public class QuestionController {
                 .orElseThrow(() -> new QuizNotFoundException(id));
         return questionRepository.findByQuiz(q);
     }
-
+*/
+    
+    @CrossOrigin
+    @GetMapping("/getQuestionsFromQuiz/{id}")
+    public @ResponseBody List<Question> getQuestionsFromQuiz(@PathVariable Long id) {
+        Quiz q = quizRepository.findById(id)
+                .orElseThrow(() -> new QuizNotFoundException(id));
+        return (List<Question>) questionRepository.findByQuiz(q);
+    }
+    
     @CrossOrigin
     @GetMapping("/questions/{id}")
     Question one(@PathVariable Long id) {
